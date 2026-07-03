@@ -1,7 +1,7 @@
-index.html
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
   <title>YUTUVE - 2009 Edition</title>
   <link rel="stylesheet" href="style.css">
 </head>
@@ -10,15 +10,37 @@ index.html
   <h1>YUTUVE (2009)</h1>
   <p>Sube tu video como si fuera YouTube en 2009.</p>
 
-  <form action="/upload" method="POST" enctype="multipart/form-data">
+  <!-- Usamos AJAX para manejar la respuesta sin recargar la página -->
+  <form id="uploadForm">
     <input type="file" name="video" required>
-    <button>Subir video</button>
+    <button type="submit">Subir video</button>
   </form>
 
   <hr>
 
-  <h3>Después de subir, abre:</h3>
-  <code>/watch/NOMBRE_DEL_VIDEO</code>
+  <div id="resultado" style="display: none;">
+    <h3>¡Video subido con éxito!</h3>
+    <p>Haz clic aquí para verlo: <a id="enlaceVideo" href="#" target="_blank">Ver mi video</a></p>
+  </div>
+
+  <script>
+    document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      
+      const res = await fetch('/upload', {
+        method: 'POST',
+        body: formData
+      });
+      
+      const data = await res.json();
+      if (data.file) {
+        document.getElementById('enlaceVideo').href = `/watch/${data.file}`;
+        document.getElementById('enlaceVideo').innerText = `https://yutuve.render.com/watch/${data.file}`;
+        document.getElementById('resultado').style.display = 'block';
+      }
+    });
+  </script>
 
 </body>
 </html>

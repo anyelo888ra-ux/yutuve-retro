@@ -1,18 +1,40 @@
-watch.html
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
   <title>Ver video - YUTUVE</title>
 </head>
 <body>
 
   <h1>Reproductor YUTUVE</h1>
 
-  <video width="640" controls>
-    <source src="/videos/VIDEO_AQUI" type="video/mp4">
+  <video id="reproductor" width="640" controls>
+    <!-- El src se llenará automáticamente con JavaScript -->
+    <source id="videoSource" type="video/mp4">
+    Tu navegador no soporta videos HTML5.
   </video>
 
   <p>Estilo retro 2009 😎</p>
+
+  <script>
+    // 1. Obtenemos el ID/Nombre del video directamente de la URL
+    // Si la URL es /watch/12345.mp4, esto extraerá "12345.mp4"
+    const urlParts = window.location.pathname.split('/');
+    const videoId = urlParts[urlParts.length - 1];
+
+    if (videoId) {
+      const video = document.getElementById('reproductor');
+      const source = document.getElementById('videoSource');
+
+      // 2. Le asignamos la ruta correcta apuntando a la carpeta /videos/ del servidor
+      source.src = `/videos/${videoId}`;
+      
+      // 3. Recargamos el reproductor para que reconozca el nuevo archivo
+      video.load();
+    } else {
+      alert("No se especificó ningún video.");
+    }
+  </script>
 
 </body>
 </html>

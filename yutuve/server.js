@@ -1,4 +1,3 @@
-server.js
 const express = require("express");
 const multer = require("multer");
 const path = require("path");
@@ -43,3 +42,4 @@ app.get("/watch/:id", (req, res) => {
 app.listen(PORT, () => {
   console.log("YUTUVE corriendo en puerto " + PORT);
 });
+

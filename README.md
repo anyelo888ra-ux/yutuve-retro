@@ -50,7 +50,7 @@ yutuve/
 Clona el repositorio:
 
 bash
-git clone https://github.com/TU-USUARIO/yutuve-retro
+git clone [https://github.com/TU-USUARIO/yutuve-retro](https://github.com/anyelo888ra-ux/yutuve-retro)
 cd yutuve-retro
 Instala dependencias:
 

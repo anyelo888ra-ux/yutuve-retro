@@ -39,7 +39,7 @@ app.get("/watch/:id", (req, res) => {
   res.sendFile(__dirname + "/views/watch.html");
 });
 
-app.listen(PORT, () => {
+// servidor
+app.listen(PORT, '0.0.0.0', () => {
   console.log("YUTUVE corriendo en puerto " + PORT);
 });
-
